@@ -1,37 +1,16 @@
 <?php
-return array(
-    'phpSettings' => array(
-        'display_startup_errors' => 1,
-        'display_errors'         => 1,
-        'error_reporting'        => (E_ALL | E_STRICT)
-    ),
-    'resources'   => array(
-        'frontController' => array(
-            'throwExceptions' => true
-        ),
-        'db' => array(
-            'params'  => array(
-                'host'     => '##HOSTNAME##',
-                'username' => '##USERNAME##',
-                'password' => '##PASSWORD##',
-                'dbname'   => '##DATABASE##'
-            )
-        ),
-        'cachemanager' => array(
-            'database' => array(
-                'frontend' => array(
-                    'options' => array(
-                        'caching' => false
-                    )
-                ),
-                'backend'  => array(
-                    'name'    => 'File',
-                    'options' => array(
-                        'cache_dir'        => ROOT_PATH . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'cache',
-                        'file_name_prefix' => 'firal_database'
-                    )
-                )
-            )
-        )
-    )
-);
+$config['phpSettings']['display_startup_errors']    = 1;
+$config['phpSettings']['display_errors']            = 1;
+$config['phpSettings']['error_reporting']           = (E_ALL | E_STRICT);
+
+$config['resources']['frontController']['throwExceptions'] = true;
+
+$config['resources']['db']['params']['host']        = '##HOSTNAME##';
+$config['resources']['db']['params']['username']    = '##USERNAME##';
+$config['resources']['db']['params']['password']    = '##PASSWORD##';
+$config['resources']['db']['params']['dbname']      = '##DATABASE##';
+
+$config['resources']['cachemanager']['database']['frontend']['options']['caching'] = false;
+$config['resources']['cachemanager']['database']['backend']['name'] = 'File';
+$config['resources']['cachemanager']['database']['backend']['options']['cache_dir'] = ROOT_PATH . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'cache';
+$config['resources']['cachemanager']['database']['backend']['options']['file_name_prefix'] = 'firal_database';
