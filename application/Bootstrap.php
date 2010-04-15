@@ -63,9 +63,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initDatabase()
     {
-        $this->bootstrap('db');
+        $this->bootstrap('multidb');
 
-        Firal_Model_Mapper_MapperAbstract::setDefaultAdapter($this->getResource('db'));
+        Firal_Model_Mapper_MapperAbstract::setDefaultAdapter($this->getPluginResource('multidb')->getDefaultDb());
     }
 
     /**
@@ -212,7 +212,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')) {
             // run Zend_Json_Server instead of the MVC stack
-            
+
             $request = new Zend_Controller_Request_Http();
             $info    = explode('/', trim($request->getPathInfo(), '/'));
 

@@ -16,7 +16,8 @@ $config['resources']['layout']['layout']        = 'layout';
 $config['resources']['layout']['pluginClass']   = 'Firal_Controller_Plugin_Layout';
 $config['resources']['layout']['layoutPath']    = APPLICATION_PATH . '/layouts/scripts';
 
-$config['resources']['db']['adapter'] = 'pdo_mysql';
+$config['resources']['multidb']['master']['adapter'] = 'pdo_mysql';
+$config['resources']['multidb']['master']['default'] = true;
 
 $config['resources']['cachemanager']['database']['frontend']['name'] = 'Core';
 $config['resources']['cachemanager']['database']['frontend']['options']['automatic_serialization'] = true;

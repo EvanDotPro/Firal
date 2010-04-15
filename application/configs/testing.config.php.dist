@@ -5,10 +5,10 @@ $config['phpSettings']['error_reporting']           = (E_ALL | E_STRICT);
 
 $config['resources']['frontController']['throwExceptions'] = true;
 
-$config['resources']['db']['params']['host']        = '##HOSTNAME##';
-$config['resources']['db']['params']['username']    = '##USERNAME##';
-$config['resources']['db']['params']['password']    = '##PASSWORD##';
-$config['resources']['db']['params']['dbname']      = '##DATABASE##';
+$config['resources']['multidb']['master']['host']        = '##HOSTNAME##';
+$config['resources']['multidb']['master']['username']    = '##USERNAME##';
+$config['resources']['multidb']['master']['password']    = '##PASSWORD##';
+$config['resources']['multidb']['master']['dbname']      = '##DATABASE##';
 
 $config['resources']['cachemanager']['database']['frontend']['options']['caching'] = false;
 $config['resources']['cachemanager']['database']['backend']['name'] = 'File';
