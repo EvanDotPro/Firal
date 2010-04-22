@@ -76,4 +76,18 @@ abstract class Firal_Addon
     {
         return $this->_modules;
     }
+
+    /**
+     * Get the path of a module
+     *
+     * @param string $module
+     *
+     * @return string
+     */
+    public function getModulePath($module)
+    {
+        if (!$this->hasModule($module)) {
+            throw new Firal_Addon_InvalidArgumentException("This add-on doesn't provide module '$module'");
+        }
+    }
 }
