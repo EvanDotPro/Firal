@@ -100,7 +100,25 @@ class Firal_Controller_Dispatcher_Addon extends Zend_Controller_Dispatcher_Stand
         }
 
         // load from addon if possible
+        foreach ($this->_addons as $addon) {
+            if ($addon->hasModule($this->_curModule)) {
+                $dispatchDir = $addon->getModulePath($this->_curModule) . DIRECTORY_SEPARATOR . 'controllers';
+                $loadFile = $dispatchDir . DIRECTORY_SEPARATOR . $this->classToFilename($className);
 
-        return parent::loadClass($finalClass);
+                if (Zend_Loader::isReadable($loadFile)) {
+                    include_once $loadFile;
+                } else {
+                    require_once 'Zend/Controller/Dispatcher/Exception.php';
+                    throw new Zend_Controller_Dispatcher_Exception('Cannot load controller class "' . $className . '" from file "' . $loadFile . "'");
+                }
+
+                if (!class_exists($finalClass, false)) {
+                    require_once 'Zend/Controller/Dispatcher/Exception.php';
+                    throw new Zend_Controller_Dispatcher_Exception('Invalid controller class ("' . $finalClass . '")');
+                }
+            }
+        }
+
+        return parent::loadClass($className);
     }
 }

@@ -44,6 +44,35 @@ abstract class Firal_Addon
      */
     protected $_modules;
 
+    /**
+     * Base addon path
+     *
+     * @var string
+     */
+    protected static $_basePath;
+
+
+    /**
+     * Set the base addon path
+     *
+     * @param string $path
+     *
+     * @return void
+     */
+    public static function setBasePath($path)
+    {
+        self::$_basePath = rtrim($path, '\\/');
+    }
+
+    /**
+     * Get the base addon path
+     *
+     * @return string
+     */
+    public static function getBasePath()
+    {
+        return self::$_basePath;
+    }
 
     /**
      * Get the addon's name
@@ -78,6 +107,16 @@ abstract class Firal_Addon
     }
 
     /**
+     * Get the path of the addon
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return self::getBasePath() . DIRECTORY_SEPARATOR . $this->getName();
+    }
+
+    /**
      * Get the path of a module
      *
      * @param string $module
@@ -89,5 +128,7 @@ abstract class Firal_Addon
         if (!$this->hasModule($module)) {
             throw new Firal_Addon_InvalidArgumentException("This add-on doesn't provide module '$module'");
         }
+
+        return $this->getPath() . DIRECTORY_SEPARATOR .  'modules' . DIRECTORY_SEPARATOR . $module;
     }
 }
