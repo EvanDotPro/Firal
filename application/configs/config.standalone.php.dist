@@ -1,8 +1,8 @@
 <?php
 return array(
     'bootstrap' => array(
-        'path'  => APPLICATION_PATH . '/ClientBootstrap.php',
-        'class' => 'ClientBootstrap'
+        'path'  => APPLICATION_PATH . '/StandaloneBootstrap.php',
+        'class' => 'StandaloneBootstrap'
     ),
     'resources' => array(
         'frontController' => array(
