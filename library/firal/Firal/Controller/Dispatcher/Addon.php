@@ -54,6 +54,24 @@ class Firal_Controller_Dispatcher_Addon extends Zend_Controller_Dispatcher_Stand
     }
 
     /**
+     * Set the addons array
+     *
+     * @param array $addons
+     *
+     * @return Firal_Controller_Dispatcher_Addon
+     */
+    public function setAddons(array $addons)
+    {
+        $this->_addons = array();
+
+        foreach ($addons as $addon) {
+            $this->addAddon($addon);
+        }
+
+        return $this;
+    }
+
+    /**
      * Get an addon
      *
      * @param string $name

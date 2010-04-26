@@ -32,18 +32,11 @@ class Firal_Controller_Plugin_Layout extends Zend_Layout_Controller_Plugin_Layou
 {
 
     /**
-     * Current theme
+     * Addons
      *
-     * @var string
+     * @var array
      */
-    protected $_theme = '';
-
-    /**
-     * Themes directory
-     *
-     * @var string
-     */
-    protected $_themesDirectory = '';
+    protected $_addons = array();
 
 
     /**
@@ -56,80 +49,76 @@ class Firal_Controller_Plugin_Layout extends Zend_Layout_Controller_Plugin_Layou
         $layout = $this->getLayout();
         $view   = $layout->getView();
 
-        if (null !== ($path = $layout->getViewScriptPath())) {
-            if (method_exists($view, 'addScriptPath')) {
-                $view->addScriptPath($path);
-            } else {
-                $view->setScriptPath($path);
-            }
-        } else {
-            // TODO: throw an exception for this case
-        }
-
         $layout->setLayoutPath($this->getThemeDirectory());
+
+        foreach ($this->_addons as $addon) {
+            if (null !== ($path = $layout->getViewScriptPath())) {
+                if (method_exists($view, 'addScriptPath')) {
+                    $view->addScriptPath($path);
+                } else {
+                    $view->setScriptPath($path);
+                }
+            } else {
+                // TODO: throw an exception for this case
+            }
+
+            $layout->setLayoutPath($addon->getPath() . DIRECTORY_SEPARATOR . 'layouts');
+        }
 
         parent::postDispatch($request);
     }
 
     /**
-     * Get the theme directory
+     * Add an addon
      *
-     * @return string
+     * @param Firal_Addon $addon
+     *
+     * @return Firal_Controller_Plugin_Layout
      */
-    public function getThemeDirectory()
+    public function addAddon(Firal_Addon $addon)
     {
-        return $this->_themesDirectory
-             . DIRECTORY_SEPARATOR . $this->_theme
-             . DIRECTORY_SEPARATOR . 'layouts'
-             . DIRECTORY_SEPARATOR . 'scripts';
-    }
-
-    /**
-     * Get the themes directory
-     *
-     * @return string
-     */
-    public function getThemesDirectory()
-    {
-        return $this->_themesDirectory;
-    }
-
-    /**
-     * Set the themes directory
-     *
-     * @param string $themesDirectory
-     *
-     * @return Firal_Controller_Action_Helper_ViewRenderer
-     */
-    public function setThemesDirectory($themesDirectory)
-    {
-        $this->_themesDirectory = $themesDirectory;
+        $this->_addons[$addon->getName()] = $addon;
 
         return $this;
     }
 
     /**
-     * Set the theme
+     * Set the addons array
      *
-     * @param string $theme
+     * @param array $addons
      *
-     * @return Firal_Controller_Action_Helper_ViewRenderer
+     * @return Firal_Controller_Plugin_Layout
      */
-    public function setTheme($theme)
+    public function setAddons(array $addons)
     {
-        $this->_theme = $theme;
+        $this->_addons = array();
+
+        foreach ($addons as $addon) {
+            $this->addAddon($addon);
+        }
 
         return $this;
     }
 
     /**
-     * Get the theme
+     * Get an addon
      *
-     * @return string
+     * @param string $name
+     *
+     * @return Firal_Addon
      */
-    public function getTheme()
+    public function getAddon($name)
     {
-        return $this->_theme;
+        return $this->_addons[$name];
     }
 
+    /**
+     * Get all addons
+     *
+     * @return array
+     */
+    public function getAddons()
+    {
+        return $this->_addons;
+    }
 }
