@@ -40,6 +40,11 @@ if (!defined('APPLICATION_ENV')) {
     define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 }
 
+// Define application mode
+if (!defined('APPLICATION_MODE')) {
+    define('APPLICATION_MODE', (getenv('APPLICATION_MODE') ? getenv('APPLICATION_MODE') : 'standalone'));
+}
+
 // create our own include path
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(LIBRARY_PATH . DIRECTORY_SEPARATOR . 'zend'),

@@ -8,4 +8,4 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 
 SetEnv APPLICATION_ENV production
-SetEnv APPLICATION_MODE standalone
+SetEnv APPLICATION_MODE server
