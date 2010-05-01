@@ -32,18 +32,11 @@ class Firal_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action
 {
 
     /**
-     * Current theme
+     * Addons
      *
-     * @var string
+     * @var array
      */
-    protected $_theme;
-
-    /**
-     * Themes directory
-     *
-     * @var string
-     */
-    protected $_themesDirectory;
+    protected $_addons = array();
 
 
     /**
@@ -53,69 +46,64 @@ class Firal_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action
      */
     public function render($action = null, $name = null, $noController = null)
     {
-        $this->view->addBasePath($this->getThemeDirectory());
+        foreach ($this->_addons as $addon) {
+            $this->view->addBasePath($addon->getModulePath($this->getModule()) . DIRECTORY_SEPARATOR . 'views');
+        }
 
         parent::render($action, $name, $noController);
     }
 
     /**
-     * Get the theme directory
+     * Add an addon
      *
-     * @return string
-     */
-    public function getThemeDirectory()
-    {
-        return $this->_themesDirectory
-             . DIRECTORY_SEPARATOR . $this->_theme
-             . DIRECTORY_SEPARATOR . $this->getModule();
-    }
-
-    /**
-     * Get the themes directory
-     *
-     * @return string
-     */
-    public function getThemesDirectory()
-    {
-        return $this->_themesDirectory;
-    }
-
-    /**
-     * Set the themes directory
-     *
-     * @param string $themesDirectory
+     * @param Firal_Addon $addon
      *
      * @return Firal_Controller_Action_Helper_ViewRenderer
      */
-    public function setThemesDirectory($themesDirectory)
+    public function addAddon(Firal_Addon $addon)
     {
-        $this->_themesDirectory = $themesDirectory;
+        $this->_addons[$addon->getName()] = $addon;
 
         return $this;
     }
 
     /**
-     * Set the theme
+     * Set the addons array
      *
-     * @param string $theme
+     * @param array $addons
      *
      * @return Firal_Controller_Action_Helper_ViewRenderer
      */
-    public function setTheme($theme)
+    public function setAddons(array $addons)
     {
-        $this->_theme = $theme;
+        $this->_addons = array();
+
+        foreach ($addons as $addon) {
+            $this->addAddon($addon);
+        }
 
         return $this;
     }
 
     /**
-     * Get the theme
+     * Get an addon
      *
-     * @return string
+     * @param string $name
+     *
+     * @return Firal_Addon
      */
-    public function getTheme()
+    public function getAddon($name)
     {
-        return $this->_theme;
+        return $this->_addons[$name];
     }
 
+    /**
+     * Get all addons
+     *
+     * @return array
+     */
+    public function getAddons()
+    {
+        return $this->_addons;
+    }
 }

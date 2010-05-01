@@ -49,8 +49,6 @@ class Firal_Controller_Plugin_Layout extends Zend_Layout_Controller_Plugin_Layou
         $layout = $this->getLayout();
         $view   = $layout->getView();
 
-        $layout->setLayoutPath($this->getThemeDirectory());
-
         foreach ($this->_addons as $addon) {
             if (null !== ($path = $layout->getViewScriptPath())) {
                 if (method_exists($view, 'addScriptPath')) {
