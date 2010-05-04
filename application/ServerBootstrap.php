@@ -76,6 +76,6 @@ class ServerBootstrap extends Firal_Bootstrap
      */
     public function run()
     {
-        echo $this->_rpcServer->handle(); die();
+        echo $this->_rpcServer->handle();
     }
 }
