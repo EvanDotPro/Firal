@@ -29,4 +29,43 @@
 class ServerBootstrap extends Firal_Bootstrap
 {
 
+    /**
+     * The RPC server object
+     *
+     * @var Firal_Service_Server_Interface
+     */
+    protected $_rpcServer = null;
+
+    /**
+     * Initiate RPC Server
+     *
+     * @return void
+     */
+    protected function _initRpcServer()
+    {
+        $request = new Zend_Controller_Request_Http();
+        $path = explode('/',trim($request->getPathInfo(),'/'));
+        $path = array_shift($path);
+        switch($path){
+            case 'xmlrpc':
+                $this->_rpcServer = new Firal_Service_Server_XmlRpc();
+                break;
+            case 'jsonrpc':
+                $this->_rpcServer = new Firal_Service_Server_JsonRpc();
+                break;
+            default:
+                throw new Exception("Invalid API Endpoint");
+                break;
+        }
+    }
+
+    /**
+     * Handle the RPC request
+     *
+     * @return void
+     */
+    public function run()
+    {
+        echo $this->_rpcServer->handle(); die();
+    }
 }
