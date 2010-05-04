@@ -57,6 +57,16 @@ class ServerBootstrap extends Firal_Bootstrap
                 throw new Exception("Invalid API Endpoint");
                 break;
         }
+
+        $this->bootstrap('AddonManager');
+        $addonManager = $this->getResource('AddonManager');
+        foreach($addonManager->getAddons() as $addon){
+            foreach($addon->getModules() as $module){
+                foreach($module->getServices() as $service){
+                    $server->setClass(new $service['class'], $service['namespace']);
+                }
+            }
+        }
     }
 
     /**
