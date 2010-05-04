@@ -92,6 +92,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     /**
      * Initialize the DI container
      *
+     * @todo Replace with an addons resource
+     *
      * @return Default_DiContainer
      */
     protected function _initDiContainer()
@@ -163,9 +165,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // configure the view renderer helper
         $config       = $this->getResource('config');
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
-
-        $viewRenderer->setTheme($config->theme);
-        $viewRenderer->setThemesDirectory(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'themes');
 
         // setup the layout
         $frontcontroller = $this->getResource('frontcontroller');
