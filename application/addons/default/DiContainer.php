@@ -27,7 +27,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Default_DiContainer extends Firal_Di_Container_ContainerAbstract
+class Default_DiContainer extends Firal_Di_Container_ContainerAbstract
 {
 
     /**

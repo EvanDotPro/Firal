@@ -26,7 +26,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class IndexController extends Zend_Controller_Action
+class Default_Default_IndexController extends Zend_Controller_Action
 {
 
     /**

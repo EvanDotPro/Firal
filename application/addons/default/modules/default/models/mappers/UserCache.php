@@ -28,7 +28,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Model_Mapper_UserCache implements Default_Model_Mapper_UserInterface
+class Default_Default_Model_Mapper_UserCache implements Default_Model_Mapper_UserInterface
 {
 
     /**

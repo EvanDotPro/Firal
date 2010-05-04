@@ -26,7 +26,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-interface Default_Service_UserInterface
+interface Default_Default_Service_UserInterface
 {
 
     /**

@@ -26,7 +26,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Service_Config implements Default_Service_ConfigInterface
+class Default_Default_Service_Config implements Default_Service_ConfigInterface
 {
 
     /**

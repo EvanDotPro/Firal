@@ -26,7 +26,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Model_Config extends Firal_Model_ModelAbstract
+class Default_Default_Model_Config extends Firal_Model_ModelAbstract
 {
 
     /**

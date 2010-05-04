@@ -28,7 +28,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-interface Default_Model_Mapper_UserInterface extends Zend_Auth_Adapter_Interface
+interface Default_Default_Model_Mapper_UserInterface extends Zend_Auth_Adapter_Interface
 {
 
 
