@@ -39,6 +39,19 @@ class Firal_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'Firal_Application_Resource',
             'Firal/Application/Resource/'
         );
+    }
+
+    /**
+     * Initialize the modules and addons stuff
+     *
+     * @return void
+     */
+    protected function _initModulesAddons()
+    {
+        $moduleLoader = new Zend_Application_Module_Autoloader(array(
+            'namespace' => 'Default_',
+            'basePath'  => MODULE_PATH . DIRECTORY_SEPARATOR . 'default'
+        ));
 
         // this is to make sure that the addon resource is loaded before the
         // frontcontroller resource
