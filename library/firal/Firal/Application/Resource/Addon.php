@@ -118,7 +118,7 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
             $moduleName = $this->_formatName($addon->getname()) . '_' . $this->_formatName($module);
 
             // evan: you did the right thing, but you simply didn't know how to configure it
-            $autoloader = new Zend_Application_Module_Autoloader(array(
+            $autoloader = new Firal_Application_Module_Autoloader(array(
                 'namespace' => $moduleName,
                 'basePath'  => $path
             ));
