@@ -93,7 +93,7 @@ abstract class Firal_Addon
      */
     public function hasModule($module)
     {
-        return isset($this->_modules[$module]);
+        return in_array($module, $this->_modules);
     }
 
     /**

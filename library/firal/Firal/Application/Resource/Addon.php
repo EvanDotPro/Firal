@@ -41,12 +41,16 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
     {
         $options = $this->getOptions();
 
+        Firal_Addon::setBasePath($options['directory']);
+
+        // initialize the addon dispatcher
         $dispatcher = new Firal_Controller_Dispatcher_Addon();
         $front      = Zend_Controller_Front::getInstance();
 
         $front->setDispatcher($dispatcher);
 
         $addons = array();
+
         // get all the add-ons and create their addon classes
         $directories = new DirectoryIterator($options['directory']);
 

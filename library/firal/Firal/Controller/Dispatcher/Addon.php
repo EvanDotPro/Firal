@@ -94,6 +94,18 @@ class Firal_Controller_Dispatcher_Addon extends Zend_Controller_Dispatcher_Stand
     }
 
     /**
+     * Temporary hack
+     *
+     * @todo replace this hack with better code
+     *
+     * @return bool
+     */
+    public function isDispatchable(Zend_Controller_Request_Abstract $request)
+    {
+        return true;
+    }
+
+    /**
      * Load a controller class
      *
      * Attempts to load the controller class file from the available addon's
@@ -117,6 +129,8 @@ class Firal_Controller_Dispatcher_Addon extends Zend_Controller_Dispatcher_Stand
             return $finalClass;
         }
 
+        $class = $finalClass;
+
         // load from addon if possible
         foreach ($this->_addons as $addon) {
             if ($addon->hasModule($this->_curModule)) {
@@ -126,18 +140,18 @@ class Firal_Controller_Dispatcher_Addon extends Zend_Controller_Dispatcher_Stand
                 if (Zend_Loader::isReadable($loadFile)) {
                     include_once $loadFile;
                 } else {
-                    require_once 'Zend/Controller/Dispatcher/Exception.php';
-                    throw new Zend_Controller_Dispatcher_Exception('Cannot load controller class "' . $className . '" from file "' . $loadFile . "'");
+                    continue;
                 }
 
-                $finalClass = ucfirst($addon->getName()) . '_' . $className;
+                $finalClass = ucfirst($addon->getName()) . '_' . $class;
 
                 if (class_exists($finalClass, false)) {
                     return $finalClass;
-                    require_once 'Zend/Controller/Dispatcher/Exception.php';
                 }
             }
         }
+
+        exit($finalClass);
 
         return parent::loadClass($className);
     }
