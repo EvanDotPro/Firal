@@ -37,10 +37,16 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
      *
      * @return array
      */
-    public function init($options = array())
+    public function init()
     {
-        $addons = array();
+        $options = $this->getOptions();
 
+        $dispatcher = new Firal_Controller_Dispatcher_Addon();
+        $front      = Zend_Controller_Front::getInstance();
+
+        $front->setDispatcher($dispatcher);
+
+        $addons = array();
         // get all the add-ons and create their addon classes
         $directories = new DirectoryIterator($options['directory']);
 
@@ -51,6 +57,8 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
                 $addons[$addon->getName()] = $addon;
             }
         }
+
+        $dispatcher->setAddons($addons);
 
         return $addons;
     }
@@ -102,10 +110,14 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
             $front->addControllerDirectory($path . DIRECTORY_SEPARATOR . $controllerDirectoryName, $module);
 
             // I'm pretty sure we just have to create a new instance for this to work
+            // I don't like pretty sure, so i comment this out temporarily, if needed
+            // I will uncomment it later
+            /*
             $autoloader = new Zend_Application_Module_Autoloader(array(
                 'namespace' => false,
                 'basePath' => dirname($path),
             ));
+            */
 
             // load the DI container for this module and put it in the registry
             $module = $this->_formatName($module);
