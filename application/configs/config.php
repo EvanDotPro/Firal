@@ -8,6 +8,9 @@ return array_merge_recursive(array(
         'Firal_'
     ),
     'resources'   => array(
+        'addon' => array(
+            'directory' => APPLICATION_PATH . '/addons'
+        ),
         'frontController' => array(
             'moduleDirectory' => APPLICATION_PATH
         ),
