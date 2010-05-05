@@ -64,7 +64,7 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
      */
     protected function _loadAddon(DirectoryIterator $directory)
     {
-        $name  = $this->_formatAddonName($directory->getFilename());
+        $name  = $this->_formatName($directory->getFilename());
         $file  = $directory->getPathname() . DIRECTORY_SEPARATOR . 'Addon.php';
         $class = $name . '_Addon';
 
@@ -93,7 +93,25 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
         $front = Zend_Controller_Front::getInstance();
 
         foreach ($addon->getModules() as $module) {
-            $front->addControllerDirectory($addon->getModulePath($module) . DIRECTORY_SEPARATOR . 'controllers', $module);
+            $path = $addon->getModulePath($module);
+
+            // add the module to the frontcontroller
+            $front->addControllerDirectory($path . DIRECTORY_SEPARATOR . 'controllers', $module);
+
+            // load the DI container for this module and put it in the registry
+            $module = $this->_formatName($module);
+            $name   = $module . '_DiContainer';
+            $class  = $this->_formatName($addon->getName()) . '_' . $name;
+
+            require_once $path . DIRECTORY_SEPARATOR . 'DiContainer.php';
+
+            if (Zend_Registry::has($name)) {
+                $diContainer = new $class(Zend_Registry::get($name));
+            } else {
+                $diContainer = new $class();
+            }
+
+            Zend_Registry::set($name, $diContainer);
         }
     }
 
@@ -104,7 +122,7 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
      *
      * @return string
      */
-    protected function _formatAddonName($name)
+    protected function _formatName($name)
     {
         $name = str_replace(array('-', '_'), ' ', $name);
         $name = ucwords(strtolower($name));
