@@ -88,15 +88,24 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
      *
      * @return void
      */
-    public function _loadModules(Firal_Addon $addon) 
+    public function _loadModules(Firal_Addon $addon)
     {
         $front = Zend_Controller_Front::getInstance();
 
         foreach ($addon->getModules() as $module) {
             $path = $addon->getModulePath($module);
 
+            // ask the frontcontroller what the name of the controller directory is
+            $controllerDirectoryName = $front->getModuleControllerDirectoryName();
+
             // add the module to the frontcontroller
-            $front->addControllerDirectory($path . DIRECTORY_SEPARATOR . 'controllers', $module);
+            $front->addControllerDirectory($path . DIRECTORY_SEPARATOR . $controllerDirectoryName, $module);
+
+            // I'm pretty sure we just have to create a new instance for this to work
+            $autoloader = new Zend_Application_Module_Autoloader(array(
+                'namespace' => false,
+                'basePath' => dirname($path),
+            ));
 
             // load the DI container for this module and put it in the registry
             $module = $this->_formatName($module);
