@@ -1,3 +1,14 @@
-development.config.php
-production.config.php
-testing.config.php
+config.standalone.php
+config.standalone.development.php
+config.standalone.testing.php
+config.standalone.production.php
+
+config.server.php
+config.server.development.php
+config.server.testing.php
+config.server.production.php
+
+config.client.php
+config.client.development.php
+config.client.testing.php
+config.client.production.php
