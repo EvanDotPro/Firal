@@ -37,13 +37,11 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
      *
      * @return array
      */
-    public function init()
+    public function init($options = array())
     {
         $addons = array();
-        $options = $this->getOptions();
 
         // get all the add-ons and create their addon classes
-
         $directories = new DirectoryIterator($options['directory']);
 
         foreach ($directories as $directory) {
@@ -84,6 +82,22 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
     }
 
     /**
+     * Load the modules of an addon
+     *
+     * @param Firal_Addon $addon
+     *
+     * @return void
+     */
+    public function _loadModules(Firal_Addon $addon) 
+    {
+        $front = Zend_Controller_Front::getInstance();
+
+        foreach ($addon->getModules() as $module) {
+            $front->addControllerDirectory($addon->getModulePath($module) . DIRECTORY_SEPARATOR . 'controllers', $module);
+        }
+    }
+
+    /**
      * Format the addon name
      *
      * @param string $name
@@ -95,4 +109,5 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
         $name = str_replace(array('-', '_'), ' ', $name);
         $name = ucwords(strtolower($name));
         return str_replace(' ', '', $name);
+    }
 }
