@@ -6,7 +6,8 @@ return array(
     ),
     'resources' => array(
         'frontController' => array(
-            'moduleDirectory' => APPLICATION_PATH . '/modules'
+            'moduleDirectory'     => APPLICATION_PATH . '/modules',
+            'prefixDefaultModule' => true
         )
     )
 );
