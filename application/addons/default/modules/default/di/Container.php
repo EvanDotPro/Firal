@@ -38,7 +38,7 @@ class Default_Default_Di_Container extends Firal_Di_Container_ContainerAbstract 
     public function getUserService()
     {
         if (!isset($this->_storage['userService'])) {
-            $this->_storage['userService'] = new Default_Service_User($this->getUserMapper());
+            $this->_storage['userService'] = new Default_Default_Service_User($this->getUserMapper());
         }
 
         return $this->_storage['userService'];
@@ -52,8 +52,8 @@ class Default_Default_Di_Container extends Firal_Di_Container_ContainerAbstract 
     public function getUserMapper()
     {
         if (!isset($this->_storage['userMapper'])) {
-            $this->_storage['userMapper'] = new Default_Model_Mapper_UserCache(
-                new Default_Model_Mapper_User(),
+            $this->_storage['userMapper'] = new Default_Default_Model_Mapper_UserCache(
+                new Default_Default_Model_Mapper_User(),
                 $this->_config['mapper']['cache']
             );
         }

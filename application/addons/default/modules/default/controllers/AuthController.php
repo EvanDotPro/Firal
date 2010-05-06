@@ -36,7 +36,7 @@ class Default_Default_AuthController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $userService = Zend_Registry::get('Default_DiContainer')->getUserService();
+        $userService = Zend_Registry::get('Default_Di_Container')->getUserService();
 
         $this->view->form = $userService->getLoginForm()->setAction($this->getHelper('url')->direct('login'));
     }

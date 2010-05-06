@@ -13,31 +13,30 @@
  * to firal-dev@googlegroups.com so we can send you a copy immediately.
  *
  * @category   Firal
- * @package    Firal_Bootstrap
+ * @package    Default_Controllers
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
 
 /**
- * Bootstrap
+ * Index Controller
  *
  * @category   Firal
- * @package    Firal_Bootstrap
+ * @package    Default_Controllers
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class StandaloneBootstrap extends Firal_Bootstrap
+class Default_Default_ErrorController extends Zend_Controller_Action
 {
 
     /**
-     * Init the mappers
+     * Error action
      *
      * @return void
      */
-    public function _initMappers()
+    public function errorAction()
     {
-        $this->bootstrap('db');
-
-        Firal_Model_Mapper_DbAbstract::setDefaultAdapter($this->getResource('db'));
+        var_dump($this->_getParam('error_handler')->exception);
+        $this->getHelper('ViewRenderer')->setNoRender(true);
     }
 }
