@@ -47,7 +47,9 @@ class Firal_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action
     public function render($action = null, $name = null, $noController = null)
     {
         foreach ($this->_addons as $addon) {
-            $this->view->addBasePath($addon->getModulePath($this->getModule()) . DIRECTORY_SEPARATOR . 'views');
+            if ($addon->hasModule($this->getModule())) {
+                $this->view->addBasePath($addon->getModulePath($this->getModule()) . DIRECTORY_SEPARATOR . 'views');
+            }
         }
 
         parent::render($action, $name, $noController);

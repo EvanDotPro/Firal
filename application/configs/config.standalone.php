@@ -19,6 +19,7 @@ return array(
                 ),
                 'backend' => array()
             )
-        )
+        ),
+        'view' => array()
     )
 );

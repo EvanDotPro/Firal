@@ -39,10 +39,13 @@ class Firal_Application_Resource_View extends Zend_Application_Resource_View
      */
     public function init()
     {
+        $this->getBootstrap()->bootstrap('addon');
+
         $view = $this->getView();
 
         $viewRenderer = new Firal_Controller_Action_Helper_ViewRenderer();
         $viewRenderer->setView($view);
+        $viewRenderer->setAddons($this->getBootstrap()->getResource('addon'));
         Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
         return $view;
     }
