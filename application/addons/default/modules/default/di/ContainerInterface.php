@@ -27,7 +27,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-interface Default_Default_DiContainerInterface
+interface Default_Default_Di_ContainerInterface
 {
 
     /**

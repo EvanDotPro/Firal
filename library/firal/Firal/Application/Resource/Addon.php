@@ -115,22 +115,20 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
             // add the module to the frontcontroller
             $front->addControllerDirectory($path . DIRECTORY_SEPARATOR . $controllerDirectoryName, $module);
 
-            $moduleName = $this->_formatName($addon->getname()) . '_' . $this->_formatName($module);
+            $addonName = $this->_formatName($addon->getname());
+            $module    = $this->_formatName($module);
 
             // evan: you did the right thing, but you simply didn't know how to configure it
             $autoloader = new Firal_Application_Module_Autoloader(array(
-                'namespace' => $moduleName,
+                'namespace' => $addonName,
                 'basePath'  => $path
-            ));
+            ), $module);
 
             // load the DI container for this module and put it in the registry
-            $module = $this->_formatName($module);
-            $name   = $module . '_DiContainer';
-            $class  = $this->_formatName($addon->getName()) . '_' . $name;
+            $name   = $module . '_Di_Container';
+            $class  = $addonName . '_' . $name;
 
-            require_once $path . DIRECTORY_SEPARATOR . 'DiContainer.php';
-
-            if (Zend_Registry::has($name)) {
+            if (Zend_Registry::isRegistered($name)) {
                 $diContainer = new $class(Zend_Registry::get($name));
             } else {
                 $diContainer = new $class();
