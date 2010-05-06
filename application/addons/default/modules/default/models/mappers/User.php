@@ -74,7 +74,7 @@ class Default_Default_Model_Mapper_User extends Firal_Model_Mapper_DbAbstract im
             return null;
         }
 
-        return new Default_Model_User($row);
+        return new Default_Default_Model_User($row);
     }
 
     /**
@@ -98,7 +98,7 @@ class Default_Default_Model_Mapper_User extends Firal_Model_Mapper_DbAbstract im
             return null;
         }
 
-        return new Default_Model_User($row);
+        return new Default_Default_Model_User($row);
     }
 
     /**
@@ -209,5 +209,4 @@ class Default_Default_Model_Mapper_User extends Firal_Model_Mapper_DbAbstract im
             $this->getAdapter()->quoteInto('id=?', $user->getId())
         );
     }
-
 }

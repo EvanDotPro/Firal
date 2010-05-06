@@ -53,7 +53,7 @@ class Default_Default_Model_Mapper_UserCache implements Default_Default_Model_Ma
      *
      * @return void
      */
-    public function __construct(Default_Model_Mapper_UserInterface $mapper, Zend_Cache_Core $cache)
+    public function __construct(Default_Default_Model_Mapper_UserInterface $mapper, Zend_Cache_Core $cache)
     {
         $this->_mapper = $mapper;
         $this->_cache  = $cache;
@@ -167,5 +167,4 @@ class Default_Default_Model_Mapper_UserCache implements Default_Default_Model_Ma
     {
         return $this->_cache;
     }
-
 }

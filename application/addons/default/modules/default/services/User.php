@@ -58,7 +58,7 @@ class Default_Default_Service_User implements Default_Default_Service_UserInterf
      *
      * @return void
      */
-    public function __construct(Default_Model_Mapper_UserInterface $mapper)
+    public function __construct(Default_Default_Model_Mapper_UserInterface $mapper)
     {
         $this->_mapper = $mapper;
     }
@@ -160,7 +160,7 @@ class Default_Default_Service_User implements Default_Default_Service_UserInterf
     public function getLoginForm()
     {
         if (null === $this->_loginForm) {
-            $this->_loginForm = new Default_Form_UserLogin();
+            $this->_loginForm = new Default_Default_Form_UserLogin();
         }
 
         return $this->_loginForm;
@@ -174,7 +174,7 @@ class Default_Default_Service_User implements Default_Default_Service_UserInterf
     public function getRegisterForm()
     {
         if (null === $this->_registerForm) {
-            $this->_registerForm = new Default_Form_UserRegister();
+            $this->_registerForm = new Default_Default_Form_UserRegister();
         }
 
         return $this->_registerForm;

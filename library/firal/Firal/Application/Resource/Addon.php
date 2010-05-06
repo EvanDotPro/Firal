@@ -39,6 +39,9 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
      */
     public function init()
     {
+        // we need the cachemanager resource bootstrapped later on
+        $this->getBootstrap()->bootstrap('cachemanager');
+
         $options = $this->getOptions();
 
         Firal_Addon::setBasePath($options['directory']);
@@ -128,10 +131,17 @@ class Firal_Application_Resource_Addon extends Zend_Application_Resource_Resourc
             $name   = $module . '_Di_Container';
             $class  = $addonName . '_' . $name;
 
+            // TODO: we need to find a clean way how to do this
+            $config = array(
+                'mapper' => array(
+                    'cache' => $this->getBootstrap()->getResource('cachemanager')->getCache('database')
+                )
+            );
+
             if (Zend_Registry::isRegistered($name)) {
-                $diContainer = new $class(Zend_Registry::get($name));
+                $diContainer = new $class($config, Zend_Registry::get($name));
             } else {
-                $diContainer = new $class();
+                $diContainer = new $class($config);
             }
 
             Zend_Registry::set($name, $diContainer);
