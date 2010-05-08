@@ -48,7 +48,7 @@ class Firal_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initModulesAddons()
     {
-        $moduleLoader = new Zend_Application_Module_Autoloader(array(
+        $moduleLoader = new Firal_Application_Module_Autoloader(array(
             'namespace' => 'Default_',
             'basePath'  => MODULE_PATH . DIRECTORY_SEPARATOR . 'default'
         ));

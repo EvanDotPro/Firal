@@ -28,53 +28,69 @@
  * @copyright  Copyright (c) 2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Firal_Application_Module_Autoloader extends Zend_Application_Module_Autoloader
+class Firal_Application_Module_AddonAutoloader extends Firal_Application_Module_Autoloader
 {
     
+    /**
+     * Constructor
+     *
+     * @param  array|Zend_Config $options
+     * @return void
+     */
+    public function __construct($options, $module)
+    {
+        parent::__construct($options);
+        $this->initDefaultResourceTypes($module);
+    }
+
     /**
      * Initialize default resource types for module resource classes
      *
      * @return void
      */
-    public function initDefaultResourceTypes()
+    public function initDefaultResourceTypes($module = false)
     {
+        if ($module === false) {
+            return;
+        }
+
         $this->addResourceTypes(array(
             'di'      => array(
-                'namespace' => 'Di',
+                'namespace' => $module . '_Di',
                 'path'      => 'di'
             ),
             'dbtable' => array(
-                'namespace' => 'Model_DbTable',
+                'namespace' => $module . '_Model_DbTable',
                 'path'      => 'models/DbTable',
             ),
             'mappers' => array(
-                'namespace' => 'Model_Mapper',
+                'namespace' => $module . '_Model_Mapper',
                 'path'      => 'models/mappers',
             ),
             'form'    => array(
-                'namespace' => 'Form',
+                'namespace' => $module . '_Form',
                 'path'      => 'forms',
             ),
             'model'   => array(
-                'namespace' => 'Model',
+                'namespace' => $module . '_Model',
                 'path'      => 'models',
             ),
             'plugin'  => array(
-                'namespace' => 'Plugin',
+                'namespace' => $module . '_Plugin',
                 'path'      => 'plugins',
             ),
             'service' => array(
-                'namespace' => 'Service',
+                'namespace' => $module . '_Service',
                 'path'      => 'services',
             ),
             'viewhelper' => array(
-                'namespace' => 'View_Helper',
+                'namespace' => $module . '_View_Helper',
                 'path'      => 'views/helpers',
             ),
             'viewfilter' => array(
-                'namespace' => 'View_Filter',
+                'namespace' => $module . '_View_Filter',
                 'path'      => 'views/filters',
-            )
+            ),
         ));
         $this->setDefaultResourceType('model');
     }
