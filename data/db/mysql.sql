@@ -24,4 +24,11 @@ CREATE TABLE pages (
     INDEX author (
         author
     )
-)
+);
+CREATE TABLE context (
+    context_id int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    host varchar(255) NOT NULL,
+    path varchar(255) DEFAULT NULL,
+    PRIMARY KEY (context_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
