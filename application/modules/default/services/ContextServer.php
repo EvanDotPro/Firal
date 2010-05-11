@@ -13,57 +13,52 @@
  * to firal-dev@googlegroups.com so we can send you a copy immediately.
  *
  * @category   Firal
- * @package    Default_Models
- * @subpackage Mapper
+ * @package    Default_Services
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
 
 /**
- * Context model mapper class
+ * Context server service class
  *
  * @category   Firal
- * @package    Default_Models
- * @subpackage Mapper
+ * @package    Default_Services
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Model_Mapper_Context extends Firal_Model_Mapper_DbAbstract implements Default_Model_Mapper_ContextInterface
+class Default_Service_ContextServer implements Default_Service_ContextInterface
 {
 
     /**
-     * Table name
+     * Service to decorate toserver
      *
-     * @var string
+     * @var Default_Service_UserInterface
      */
-    protected $_name = 'context';
+    protected $_service;
+
 
     /**
-     * Fetch details about a context based on the host and path
+     * Constructor
+     *
+     * @param Default_Service_ContextInterface $service
+     *
+     * @return void
+     */
+    public function __construct(Default_Service_ContextInterface $service)
+    {
+        $this->_service = $service;
+    }
+
+    /**
+     * Finds a context via the host and path
      *
      * @param string $host
      * @param string $path
      *
-     * @return Default_Model_Context
+     * @return array|bool
      */
-    public function fetchByHostPath($host, $path = null)
+    public function fetchByHostPath($host, $path)
     {
-        $db = $this->getAdapter();
-
-        $sql = $db->select()
-                  ->from($this->getTableName())
-                  ->where('host = ?', $host);
-
-        if ($path !== null) {
-            $sql->where('path = ?', $path);
-        }
-
-        $row = $db->fetchRow($sql);
-
-        if (false === $row) {
-            return null;
-        }
-
-        return new Default_Model_Context($row);
+        return $this->_service->fetchByHostPath($data);
     }
 }

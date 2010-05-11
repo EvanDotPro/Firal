@@ -30,8 +30,5 @@
 class Default_Di_Container extends Firal_Di_Container_ContainerAbstract
 {
 
-    /**
-     * kokx said not to worry about this yet
-     */
 
 }

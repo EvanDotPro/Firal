@@ -26,7 +26,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Service_ContextInterface
+interface Default_Service_ContextInterface
 {
 
     /**
@@ -35,7 +35,7 @@ class Default_Service_ContextInterface
      * @param string $host
      * @param string $path
      *
-     * @return bool
+     * @return array|bool
      */
     public function fetchByHostPath($host, $path);
 }

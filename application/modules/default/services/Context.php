@@ -26,7 +26,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Service_Context  implements Default_Service_ContextInterface
+class Default_Service_Context implements Default_Service_ContextInterface
 {
 
     /**
@@ -59,7 +59,7 @@ class Default_Service_Context  implements Default_Service_ContextInterface
     public function fetchByHostPath($host, $path)
     {
         $context = $this->_mapper->fetchByHostPath($host, $path);
-        if (is_array($context)) {
+        if ($context instanceof Default_Model_Context) {
             return $context;
         } else {
             return false;

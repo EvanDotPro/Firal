@@ -53,6 +53,11 @@ class Firal_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'basePath'  => MODULE_PATH . DIRECTORY_SEPARATOR . 'default'
         ));
 
+        // Coming... soon?
+        //$diContainer = new Default_Di_Container();
+        //$service = $diContainer->getContextService();
+        //var_dump($service->fetchByHostPath('host','path'));
+
         // this is to make sure that the addon resource is loaded before the
         // frontcontroller resource
         $this->bootstrap('addon');
