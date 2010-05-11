@@ -26,7 +26,7 @@
  * @copyright  Copyright (c) 2009-2010 Firal (http://firal.org/)
  * @license    http://firal.org/licenses/new-bsd    New BSD License
  */
-class Default_Service_ContextServer implements Default_Service_ContextInterface
+class Default_Service_ContextClient implements Default_Service_ContextInterface
 {
 
     /**
@@ -55,7 +55,7 @@ class Default_Service_ContextServer implements Default_Service_ContextInterface
      * @param string $host
      * @param string $path
      *
-     * @return array|bool
+     * @return Default_Model_Context|bool
      */
     public function fetchByHostPath($host, $path)
     {
@@ -63,12 +63,7 @@ class Default_Service_ContextServer implements Default_Service_ContextInterface
         // the thing is, the server must return simple types
         $context = $this->_service->fetchByHostPath($host, $path);
         if ($context) {
-            $return = array();
-            $return['context_id'] = $context->getId();
-            $return['name'] = $context->getName();
-            $return['host'] = $context->getHost();
-            $return['path'] = $context->getPath();
-            return $return;
+            return new Default_Model_Context($context);
         } else {
             return false;
         }

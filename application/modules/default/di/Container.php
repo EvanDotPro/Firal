@@ -38,9 +38,17 @@ class Default_Di_Container extends Firal_Di_Container_ContainerAbstract
     public function getContextServiceStandalone()
     {
         if (!isset($this->_storage['contextService'])) {
+            /**
+             * This is exaggerated to show how the response goes from being an object
+             * to a simple data type for RPC, then back to an object on the client side.
+             * We'll skip this step in standalone mode, most likely since it's only needed
+             * for RPC, but I'm not positive of that.
+             */
             $mapper = new Default_Model_Mapper_Context();
             $service = new Default_Service_Context($mapper);
-            $this->_storage['contextService'] = new Default_Service_ContextServer($service);
+            $serviceServer = new Default_Service_ContextServer($service);
+            $serviceClient = new Default_Service_ContextClient($serviceServer);
+            $this->_storage['contextService'] = $serviceClient;
         }
         return $this->_storage['contextService'];
     }
