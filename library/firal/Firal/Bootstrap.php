@@ -28,6 +28,8 @@
  */
 class Firal_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    protected $_diContainer;
+
     /**
      * Initialize the plugin loader
      *
@@ -53,13 +55,26 @@ class Firal_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'basePath'  => MODULE_PATH . DIRECTORY_SEPARATOR . 'default'
         ));
 
-        // Coming... soon?
-        //$diContainer = new Default_Di_Container();
-        //$service = $diContainer->getContextService();
-        //var_dump($service->fetchByHostPath('host','path'));
+        $this->_diContainer = new Default_Di_Container();
 
         // this is to make sure that the addon resource is loaded before the
         // frontcontroller resource
         $this->bootstrap('addon');
     }
+
+    /**
+     * This will be to figure out the site and stuff, but ultimately will only be on client/standalone
+     *
+     * @return void
+     */
+    protected function _initSite()
+    {
+        // Coming... soon?
+        $siteContext = $this->_diContainer->getContextService()->fetchByHostPath('host','path');
+        // just to make the debug output more readable
+        Zend_Debug::dump($siteContext);
+        echo '<hr/>';
+    }
+
+
 }

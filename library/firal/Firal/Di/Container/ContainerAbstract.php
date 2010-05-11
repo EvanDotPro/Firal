@@ -75,32 +75,18 @@ abstract class Firal_Di_Container_ContainerAbstract
         $this->_config = $config;
     }
 
+
+    /**
+     * __call to run the proper mode-aware method... this keeps the "interface" consistent
+     *
+     * @param string $name
+     * @param array $arguments
+     *
+     * @return void
+     */
     public function __call($name, $arguments)
     {
-        if (substr($name, 0, 3) !== 'get' || substr($name, -7) !== 'Service') {
-            die("Invalid: {$name}");
-        }
-
-        $name = substr($name, 3, -7);
-
-        if (!isset($this->_storage['services'][$name])) {
-
-            switch (APPLICATION_MODE) {
-                case 'standalone':
-                    // this is total crap, and will not be done like this
-                    $className = get_class($this);
-                    $classPrefix = substr($className, 0, strpos($className, 'Di'));
-                    $serviceClass = $classPrefix.'Service_'.$name;
-                    $mapperClass = $classPrefix.'Model_Mapper_'.$name;
-                    $mapper = new $mapperClass();
-                    $this->_storage['services'][$name] = new $serviceClass($mapper);
-                    break;
-
-
-            }
-        }
-        return $this->_storage['services'][$name];
-        die("Valid: {$name}");
+        return call_user_func_array(array($this, $name . ucfirst(strtolower(APPLICATION_MODE))), $arguments);
     }
 
 }

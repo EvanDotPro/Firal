@@ -59,6 +59,6 @@ class Default_Service_ContextServer implements Default_Service_ContextInterface
      */
     public function fetchByHostPath($host, $path)
     {
-        return $this->_service->fetchByHostPath($data);
+        return $this->_service->fetchByHostPath($host, $path);
     }
 }

@@ -30,5 +30,18 @@
 class Default_Di_Container extends Firal_Di_Container_ContainerAbstract
 {
 
-
+    /**
+     * getContextServiceStandalone
+     *
+     * @return Default_Service_ContextServer
+     */
+    public function getContextServiceStandalone()
+    {
+        if (!isset($this->_storage['contextService'])) {
+            $mapper = new Default_Model_Mapper_Context();
+            $service = new Default_Service_Context($mapper);
+            $this->_storage['contextService'] = new Default_Service_ContextServer($service);
+        }
+        return $this->_storage['contextService'];
+    }
 }
